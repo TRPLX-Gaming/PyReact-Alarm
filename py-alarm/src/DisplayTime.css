@@ -1,0 +1,11 @@
+.time {
+  text-align: center;
+  font-size: 40px;
+  font-family: Monospace;
+  font-weight: bold;
+}
+
+.div {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
