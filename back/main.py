@@ -32,9 +32,9 @@ def serve_static_assets(filename):
         return send_from_directory(static_directory, filename)
     return send_from_directory(static_directory, 'index.html')
     
-@app.errorhandler(404)
-def serve_frontend_err(e):
-  return send_from_directory(static_directory,'index.html')
+# @app.errorhandler(404)
+# def serve_frontend_err(e):
+#   return send_from_directory(static_directory,'index.html')
 
 # ----------------------
 
