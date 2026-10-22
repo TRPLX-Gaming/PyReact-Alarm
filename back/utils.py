@@ -1,9 +1,8 @@
 # deprecated as client will handle the alarm logic
 
 import os
-import main 
 
-BASE_DIR = main.BASE_DIR
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE = os.path.join(BASE_DIR, 'alarms.txt')
 
 # get alarms 
