@@ -13,7 +13,7 @@ app = Flask(__name__)
 # consts
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-static_directory = os.path.join(BASE_DIR, '../py-alarm', 'dist')
+static_directory = os.path.join(BASE_DIR, '..', 'py-alarm', 'dist')
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/css', '.css')
 
