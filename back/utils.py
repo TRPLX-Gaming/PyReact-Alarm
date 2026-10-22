@@ -36,7 +36,9 @@ def del_alarm(alarm_index:int) -> str:
   deleted_alarm = current_alarm_list.pop(alarm_index)
   alarm_writer(current_alarm_list)
   
-  return f'deleted: {deleted_alarm}'
+  return f'deleted: {deleted_alarm}' 
+  
+  
   
 def alarm_writer(alarm_list:list[str]) -> None:
   with open(FILE,'w',encoding='utf-8') as file:
