@@ -1,4 +1,42 @@
-.items-container {
-  margin-top: 30px;
+.alarm-container, .btn-container {
+  margin-top: 20px;
   background-color: transparent;
+  text-align: center;
+}
+
+.alarm-container input {
+  display: flex;
+  font-family: Monospace;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.btn-container button, .alarm-btn, .clear-btn {
+  color: black;
+  background-color: white;
+  border: 3px solid black;
+  font-size: 30px;
+  font-family: Comic Sans MS;
+  border-radius: 6px;
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
+  width: fit-content;
+  align-items: center;
+  padding: 10px;
+}
+
+.clear-btn {
+  color: red;
+  border: 3px solid red;
 }

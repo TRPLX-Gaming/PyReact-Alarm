@@ -1,13 +1,14 @@
 import {useState, useEffect} from 'react'
 import './DisplayTime.css'
 
+export const formatter = Intl.DateTimeFormat('en-US',{
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false
+})
+
 function DisplayTime() {
-  const formatter = Intl.DateTimeFormat('en-US',{
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false
-  })
   
   const initTime = formatter.format(new Date())
   const [currentTime, updateTime] = useState(initTime)
