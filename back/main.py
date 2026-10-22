@@ -13,18 +13,18 @@ app = Flask(__name__)
 # consts
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-static_directory = os.path.normpath(os.path.join(BASE_DIR, '..', 'py-alarm', 'dist'))
+static_directory = os.path.normpath(os.path.join(BASE_DIR, '..', 'py-alarm', 'dist/'))
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/css', '.css')
 
 # frontend rendering
 # ----------------------
-@app.route('/')
+@app.route('/',methods=['GET','HEAD'])
 def serve_frontend():
   # return frontend
     return send_from_directory(static_directory,'index.html')
     
-@app.route('/<path:filename>')
+@app.route('/<path:filename>',methods=['GET','HEAD'])
 def serve_static_assets(filename):
     file_path = os.path.join(static_directory, filename)
     if os.path.exists(file_path):
