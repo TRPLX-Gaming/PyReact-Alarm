@@ -14,6 +14,7 @@ app = Flask(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 static_directory = os.path.normpath(os.path.join(BASE_DIR, '..', 'py-alarm', 'dist/'))
+print('\n\n\n\n\n\n\n\n\n\n\n\n\n',static_directory)
 mimetypes.add_type('application/javascript', '.js')
 mimetypes.add_type('text/css', '.css')
 
@@ -71,4 +72,5 @@ def serve_frontend_err(e):
 #   }
   
 if __name__ == '__main__':
+  print('\n\n\n\n\n\n\n\n\n\n\n\n\n',static_directory)
   app.run('0.0.0.0',port=6000,debug=True)#,use_reloader=False)
