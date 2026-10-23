@@ -1,5 +1,5 @@
 # Simple Python/React Alarm App
-A simple alarm clock built with React with a python backend.
+A simple alarm clock built with React 19 with a python backend.
 
 # Development
 
