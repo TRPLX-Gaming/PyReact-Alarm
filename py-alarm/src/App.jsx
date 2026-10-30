@@ -1,21 +1,20 @@
 import { useState } from 'react'
-import DisplayTime from './DisplayTime'
+import DisplayTime from './components/DisplayTime'
 import AlarmManager from './AlarmManager'
-import './App.css'
+import NewAlarmManager from './NewAlarmManager'
+import './styles/App.css'
 
 function App() {
   
   // states init 
   const [isInverse, setTitleState] = useState(false)
   
-  
   // title change
   const hollowStyle = {
     color: isInverse ? 'red' : 'transparent',
     WebkitTextStroke: isInverse ? '2px marine' : '2px black'
   }
-  
-  
+
   // display content
   return (
     <>
@@ -38,7 +37,11 @@ function App() {
   
       <DisplayTime />
       
+      {/*
       <AlarmManager />
+      */}
+      
+      <NewAlarmManager />
       
     </>
   

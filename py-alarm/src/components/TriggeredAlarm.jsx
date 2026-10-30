@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import './AlarmManager.css'
+import { useEffect } from 'react'
+import './../styles/AlarmManager.css'
 
 function TriggeredAlarm({targetAlarmTime, showDisplay}) {
   
@@ -8,7 +8,7 @@ function TriggeredAlarm({targetAlarmTime, showDisplay}) {
     
     const timer = setTimeout(()=>{
       showDisplay(false)
-    },5000)
+    },60000)
     
     return () => clearTimeout(timer)
   },[])

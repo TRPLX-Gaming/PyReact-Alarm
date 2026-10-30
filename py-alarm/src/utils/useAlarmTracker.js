@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { formatter } from './DisplayTime'
+import { formatter } from './dateObjectFormatter'
 
 const useAlarmTracker = (alarmList, triggerFunc) => {
   

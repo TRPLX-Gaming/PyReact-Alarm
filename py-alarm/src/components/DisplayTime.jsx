@@ -1,12 +1,6 @@
 import {useState, useEffect} from 'react'
-import './DisplayTime.css'
-
-export const formatter = Intl.DateTimeFormat('en-US',{
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-  hour12: false
-})
+import { formatter } from './../utils/dateObjectFormatter'
+import './../styles/DisplayTime.css'
 
 function DisplayTime() {
   

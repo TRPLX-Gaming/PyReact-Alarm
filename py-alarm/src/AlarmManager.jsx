@@ -1,10 +1,14 @@
 import {useState, useEffect} from 'react'
-import useAlarmTracker from './useAlarmTracker'
-import TriggeredAlarm from './TriggeredAlarm'
-import './AlarmManager.css'
+import TimeInputContainer from './components/TimeInputContainer'
+import useAlarmTracker from './utils/useAlarmTracker'
+import TriggeredAlarm from './components/TriggeredAlarm'
+import AddAlarmBtn from './components/AddAlarmBtn'
+import ModifyAlarmBtn from './components/ModifyAlarmBtn'
+import './styles/AlarmManager.css'
 
 function AlarmManager() {
-  // one alarm handler
+  // bunch of state mgt props to be passed down
+  // one alarm handler -> multiple alarm handler
   const [alarmList, updateList] = useState([])
   
   // handling different inputs for hh:mm:ss
@@ -16,22 +20,38 @@ function AlarmManager() {
   const [showTimeContainer, toggleTimeContainer] = useState(true)
   
   // handling alarm btn contents & behavior
-  const [alarmBtnText, setAlarmBtnText] = useState('Add Alarm')
-  const [alarmPhase, setAlarmPhase] = useState('ALARM')
+  const [alarmBtnText, setAlarmBtnText] = useState('Start Alarm')
+  const [alarmPhase, setAlarmPhase] = useState('NO-ALARM-SET')
+  
+  // handling alarm index input & state mgt 
+  const [alarmIndex, updateAlarmIndex] = useState('')
+  const [selectAlarmState, setAlarmSelectState] = useState(false)
   
   // consts 
-  const alarmPhases = ['ALARM', 'EDIT-ALARM', 'SAVE-ALARM']
+  const alarmPhases = ['NO-ALARM-SET','ALREADY-SET','CHOOSE-ALARM','SAVE-CHANGES']
   
   // manage triggered alarm 
   const [showTriggered, toggleTriggered] = useState(false)
   
-  // updating alarm
-  const updateAlarm = () => {
+  // --------------------------------------------
+  /*
+  // add alarm
+  const addAlarm = () => {
     const newAlarm = [{
       time: `${formattedTime()}`
     }]
-    updateList(newAlarm)
-    return newAlarm[0].time
+    updateList([...alarmList,newAlarm])
+  }
+  */
+  
+  // update alarm 
+  const updateAlarm = index => {
+    const modifiedAlarm = {
+      time: `${formattedTime()}`
+    }
+    
+    alarmList[index] = modifiedAlarm
+    updateList([...alarmList])
   }
   
   // handling time input 
@@ -39,6 +59,12 @@ function AlarmManager() {
     const cleaned = val.replace('/\D/g','')
     const timeVal = parseInt(cleaned) 
     if (cleaned.length <= maxLength && timeVal <= maxTimeVal) updateStateFunc(cleaned)
+  }
+  
+  // handling alarm input 
+  const handleIndexInput = (val, maxLength, updateStateFunc) => {
+    const cleaned = val.replace('/\D/g','')
+    if(cleaned.length <= maxLength) updateStateFunc(parseInt(cleaned))
   }
   
   // check if time inputs are empty 
@@ -57,6 +83,17 @@ function AlarmManager() {
   useAlarmTracker(alarmList,toggleTriggered)
   
   
+  // alarm btn components 
+  const btns = {
+    add: <AddAlarmBtn 
+      alarmList={alarmList}  
+      addAlarmFunc={addAlarm}
+      setAlarmEditingPhase={setAlarmPhase}
+    />,
+    modify: <ModifyAlarmBtn />,
+  }
+  
+  
   // ui 
   return (
     <>
@@ -66,7 +103,7 @@ function AlarmManager() {
         {/* handling either showing the time input or the alarm */}
         
         {
-          showTimeContainer ? (
+       //   showTimeContainer ? (
           <>
             <p>Input your time (24h format)</p>
           
@@ -106,84 +143,118 @@ function AlarmManager() {
                 
               </div>
             </div>
+        {/*
           </>
           ) : (
           <>
+        */}
             {/* to show the time  */}
             <div>
-              {/* rendering the alarm list of just 1 */}
+              {/* rendering the alarm list */}
               {
                 alarmList.map((alarm,index) => (
-                  <h1 key={`${index}`}>
-                    Alarm set for -&gt; {alarm.time}
+                  <h1 key={`${index}`}
+                    style={{marginTop:'15px'}}
+                  >
+                    {index + 1}. Alarm set for -&gt; {alarm[index].time}
                   </h1> 
                 ))
               }
                 
             </div>
           </>
-          )
+          //)
         }
         
       </div>
       
-      {/* button to edit alarm */}
-      <div className={'center'}>
-        <div className={'btn-container'}>
+
+      
+         <div className={'center'}>
+         <div className={'btn-container'}>
+           
+          {/* button to edit alarm */}
+          {/* old version */}
+          {/*-------------------------OLD-------------------*/}
+          {    
+        //     {/* picking between phases of the alarm btn  */}
+        //     {
+        //       alarmPhase === alarmPhases[0] ? (
+        //         // handle alarm creation
+                
+        //         <button
+        //           className={'alarm-btn'}
+        //           onClick={()=>{
+        //             toggleTimeContainer(false)
+        //             setAlarmBtnText('Modify Alarm')
+        //             updateAlarm()
+        //             setAlarmPhase(alarmPhases[1])
+        //           }}
+        //         >
+        //           {alarmBtnText}
+        //         </button>
+                
+        //       ) : alarmPhase === alarmPhases[1] ? (
+        //       // handle when alarm has been created
+        //       <>
+        //         <button
+        //           className={'alarm-btn'}
+        //           onClick={()=>{
+        //             toggleTimeContainer(true)
+        //             setAlarmBtnText('Save Changes')
+        //             //setAlarmPhase(alarmPhases[2])
+        //           }}
+        //         >
+        //           {alarmBtnText}
+        //         </button>
+                
+        //         {/* select alarm index input element */}
+        //         <input 
+        //           type={'number'}
+        //           className={'alarm-index'}
+        //           placeholder={`${alarmList.length >= 2 ?
+        //             (`Index: 1 - ${alarmList.length - 1}`)
+        //           : 
+        //             (`Index: 1 - 2`)
+        //           }`}
+        //           value={alarmIndex}
+        //           onClick={(e)=>{handleIndexInput(e.target.value,2,updateAlarmIndex)}}
+        //         />
+        //       </>
+              
+        //       ) : alarmPhase === alarmPhases[2] ? (
+        //         // handle when you want to save new alarm time 
+        //         <button
+        //           className={'alarm-btn'}
+        //           onClick={()=>{
+        //             toggleTimeContainer(false)
+        //             setAlarmBtnText('Modify Alarm')
+        //             updateAlarm()
+        //             setAlarmPhase(alarmPhases[1])
+        //           }}
+        //         >
+        //           {alarmBtnText}
+        //         </button>
+                
+                
+        //       ) : (
+              
+        //         // fallback case 
+        //         <button className={alarm-btn}>Incomplete</button>
+                
+        //       )
+        //     }
+            
+        }
+            
+          {/*---------------------------OLD-----------------*/}
+            
+          {/* new alarm btn state mgt */}
           
-          {/* picking between phases of the alarm btn  */}
           {
-            alarmPhase === alarmPhases[0] ? (
-              // handle alarm creation
-              
-              <button
-                className={'alarm-btn'}
-                onClick={()=>{
-                  toggleTimeContainer(false)
-                  setAlarmBtnText('Modify Alarm')
-                  updateAlarm()
-                  setAlarmPhase(alarmPhases[1])
-                }}
-              >
-                {alarmBtnText}
-              </button>
-              
-            ) : alarmPhase === alarmPhases[1] ? (
-            // handle when alarm has been created
-            
-              <button
-                className={'alarm-btn'}
-                onClick={()=>{
-                  toggleTimeContainer(true)
-                  setAlarmBtnText('Save Changes')
-                  setAlarmPhase(alarmPhases[2])
-                }}
-              >
-                {alarmBtnText}
-              </button>
-              
-            ) : alarmPhase === alarmPhases[2] ? (
-              // handle when you want to save new alarm time 
-              <button
-                className={'alarm-btn'}
-                onClick={()=>{
-                  toggleTimeContainer(false)
-                  setAlarmBtnText('Modify Alarm')
-                  updateAlarm()
-                  setAlarmPhase(alarmPhases[1])
-                }}
-              >
-                {alarmBtnText}
-              </button>
-              
-              
-            ) : (
-            
-              // fallback case 
-              <button className={alarm-btn}>Incomplete</button>
-              
-            )
+            btns.add
           }
+          
           
           {/* clear input contents */}
           <button
@@ -257,6 +328,7 @@ const centerDiv = {
 
 export default AlarmManager
 
+// v1.0.0
 // dev notes:
 /**
  * 1 - limit adding of multiple alarm items to just one 
@@ -264,3 +336,10 @@ export default AlarmManager
  * 3 - try adding a server based alarm store but using only file storage on a free BaaS platform isnt that persistent unless for personal use which user mgt sys couldve helped but nah
   * 4 - round up the UI, resort to client based storage and deploy final version
  */
+ 
+ // v1.1.0 
+ // new patch notes 
+ /**
+  * will update the alarm system to multiple instead of just one
+  * creating an array of alarms in which every alarm is tracked
+  */
