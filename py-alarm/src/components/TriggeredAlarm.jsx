@@ -1,7 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import './../styles/AlarmManager.css'
 
-function TriggeredAlarm({targetAlarmTime, showDisplay}) {
+// thinking of adding a structure where this component is linked to the index of the target alarm 
+
+function TriggeredAlarm({
+  alarmList,
+  targetAlarmIndex, 
+  showDisplay
+}) {
+  
+  // retrieve alarm list for tracking
+  const currentAlarmList = useRef(alarmList)
   
   // automatically delete notification
   useEffect(()=>{

@@ -5,6 +5,7 @@ import AlarmsContainer from './components/AlarmsContainer'
 import BtnContainer from './components/BtnContainer'
 import TriggeredAlarm from './components/TriggeredAlarm'
 import useAlarmTracker from './utils/useAlarmTracker'
+import TriggeredContainer from './components/TriggeredContainer'
 import { formattedTimeInputs } from './utils/alarmMethods'
 import './styles/AlarmManager.css'
 
