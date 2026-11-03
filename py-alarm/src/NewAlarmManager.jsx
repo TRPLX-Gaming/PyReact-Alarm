@@ -3,9 +3,9 @@ import TimeInputContainer from './components/TimeInputContainer'
 import ClearInputBtn from './components/ClearInputBtn'
 import AlarmsContainer from './components/AlarmsContainer'
 import BtnContainer from './components/BtnContainer'
-import TriggeredAlarm from './components/TriggeredAlarm'
+//import TriggeredAlarm from './components/TriggeredAlarm'
 import useAlarmTracker from './utils/useAlarmTracker'
-import TriggeredContainer from './components/TriggeredContainer'
+//import TriggeredContainer from './components/TriggeredContainer'
 import { formattedTimeInputs } from './utils/alarmMethods'
 import './styles/AlarmManager.css'
 
@@ -80,6 +80,7 @@ function NewAlarmManager() {
         updateBtnState={setBtnState}
       />
       
+      {/* the alarmtracker will handle it in the most basic way. more projects to be built, i will come back to this one
       {
         showTrigger ? (
           <TriggeredAlarm 
@@ -91,6 +92,7 @@ function NewAlarmManager() {
         )
         
       }
+      */}
       
     </>
   )

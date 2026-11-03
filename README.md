@@ -60,6 +60,23 @@ hang of it
     -   able to modify and delete alarm instances with their indexes 
     -   alarm tracking with a trigger element
 
+### **III. v2.0.1**
+
+-   **Background**: Currently, I'm in a time crunch because my IT program is
+about to end and I plan to build a quiz platform which I will expand upon later
+on, calling it TripQuiz so I'll have to round up this project to work on the
+other. The tradeoff I made for speed was customisability as I simply used the
+native `alert()` function to show that the alarm has been triggered. My initial
+plan was to use customized modals(```TriggeredAlarm``` component) that appear
+when each alarm time reaches. Then it'd track the alarm via it's own parallel
+list of triggers that mirror operations made on the other alarm list. This is
+just the baseline for more features down the line. The codebase overhaul was
+needed to make it more scalable for future projects.
+
+-   **Core Features:**:
+    -   basic alarm tracking using `alert()`
+    -   no audio-enabled alarms yet 
+
 
 ## **Upcoming Features**
 -   support to track all alarm instances
